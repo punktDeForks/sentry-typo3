@@ -9,7 +9,8 @@ class ExceptionHandler extends ProductionExceptionHandler
 {
     protected function logException(\Exception $exception, $errorMessage, $code)
     {
-        if (Environment::getContext()->isDevelopment()) {
+        $context = \TYPO3\CMS\Core\Utility\GeneralUtility::getApplicationContext();
+        if ($context->isDevelopment()) {
             throw $exception;
         }
         $this->logger->alert(
